@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: koinonia_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-koinonia}
+      POSTGRES_USER: ${POSTGRES_USER:-koinonia}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-koinonia}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    container_name: koinonia_api
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg2://koinonia:koinonia@db:5432/koinonia}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      UPLOAD_DIR: ${UPLOAD_DIR:-/app/uploads}
+    volumes:
+      - uploads_data:/app/uploads
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres_data:
+  uploads_data:
