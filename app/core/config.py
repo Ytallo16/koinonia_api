@@ -14,7 +14,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    app_name: str = "Frequencia Koinonia API"
+    app_name: str = "Koinonia"
     app_env: str = "development"
     api_prefix: str = ""
 
