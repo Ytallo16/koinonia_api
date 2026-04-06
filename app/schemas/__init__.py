@@ -1,3 +1,4 @@
+from app.schemas.catalogo_musica import CatalogoMusicaCreate, CatalogoMusicaOut, CatalogoMusicaUpdate
 from app.schemas.ciclo import CicloCreate, CicloOut
 from app.schemas.dashboard import (
     DashboardCoralistaItemOut,
@@ -13,11 +14,14 @@ from app.schemas.frequencia import (
 )
 from app.schemas.inicio import InicioResumoOut, ProximoEventoOut
 from app.schemas.matricula import MatriculaBulkUpsertIn, MatriculaItemIn, MatriculaOut
-from app.schemas.musica import EscalaIn, EscalaOut, EscalasBulkIn, MusicaCreate, MusicaOut, MusicaUpdate
+from app.schemas.musica import EscalaIn, EscalaOut, EscalasBulkIn, MusicaCreate, MusicasSelecaoIn, MusicaOut, MusicaUpdate
 from app.schemas.pessoa import PessoaCreate, PessoaOut, PessoaResumo, PessoaUpdate
 from app.schemas.trimestre import TrimestreCreate, TrimestreOut
 
 __all__ = [
+    "CatalogoMusicaCreate",
+    "CatalogoMusicaOut",
+    "CatalogoMusicaUpdate",
     "CicloCreate",
     "CicloOut",
     "DashboardCoralistaItemOut",
@@ -39,6 +43,7 @@ __all__ = [
     "EscalaOut",
     "EscalasBulkIn",
     "MusicaCreate",
+    "MusicasSelecaoIn",
     "MusicaOut",
     "MusicaUpdate",
     "PessoaCreate",

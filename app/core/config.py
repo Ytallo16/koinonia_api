@@ -1,20 +1,25 @@
 from __future__ import annotations
 
+from typing import Annotated
 from typing import List
 
 from pydantic import field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
 
     app_name: str = "Frequencia Koinonia API"
     app_env: str = "development"
     api_prefix: str = ""
 
     database_url: str = "postgresql+psycopg2://koinonia:koinonia@db:5432/koinonia"
-    cors_origins: List[str] = ["*"]
+    cors_origins: Annotated[List[str], NoDecode] = ["*"]
     upload_dir: str = "/app/uploads"
 
     @field_validator("cors_origins", mode="before")
@@ -33,4 +38,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-

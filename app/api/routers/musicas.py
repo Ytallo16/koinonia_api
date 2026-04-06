@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.repositories import musicas as musicas_repo
-from app.schemas.musica import EscalasBulkIn, MusicaCreate, MusicaOut, MusicaUpdate
+from app.schemas.musica import EscalasBulkIn, MusicaCreate, MusicasSelecaoIn, MusicaOut, MusicaUpdate
 
 router = APIRouter(tags=["musicas"])
 
@@ -22,6 +22,15 @@ def criar_musica_evento(
     db: Session = Depends(get_db),
 ) -> MusicaOut:
     return musicas_repo.create_musica(db, evento_id, payload)
+
+
+@router.post("/eventos/{evento_id}/musicas/selecionar", response_model=list[MusicaOut])
+def selecionar_musicas_evento(
+    evento_id: str,
+    payload: MusicasSelecaoIn,
+    db: Session = Depends(get_db),
+) -> list[MusicaOut]:
+    return musicas_repo.add_catalogo_musicas_to_evento(db, evento_id, payload)
 
 
 @router.put("/eventos/{evento_id}/musicas/{musica_id}", response_model=MusicaOut)

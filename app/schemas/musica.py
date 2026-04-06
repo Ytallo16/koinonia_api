@@ -22,15 +22,20 @@ class EscalaOut(BaseModel):
 
 
 class MusicaCreate(BaseModel):
+    catalogo_musica_id: str | None = None
     nome: str
+    autor: str | None = None
     link: str | None = None
+    descricao: str = ""
     ordem: int = Field(default=0, ge=0)
     escalas: list[EscalaIn] = Field(default_factory=list)
 
 
 class MusicaUpdate(BaseModel):
     nome: str | None = None
+    autor: str | None = None
     link: str | None = None
+    descricao: str | None = None
     ordem: int | None = Field(default=None, ge=0)
 
 
@@ -43,7 +48,14 @@ class MusicaOut(BaseModel):
 
     id: str
     evento_id: str
+    catalogo_musica_id: str | None = None
     nome: str
+    autor: str | None = None
     link: str | None = None
+    descricao: str
     ordem: int
     escalas: list[EscalaOut] = Field(default_factory=list)
+
+
+class MusicasSelecaoIn(BaseModel):
+    catalogo_musica_ids: list[str]

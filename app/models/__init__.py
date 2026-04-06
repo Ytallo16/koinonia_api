@@ -1,3 +1,4 @@
+from app.models.catalogo_musica import CatalogoMusica
 from app.models.ciclo import Ciclo
 from app.models.evento import Evento
 from app.models.frequencia import Frequencia
@@ -8,6 +9,7 @@ from app.models.pessoa import Pessoa
 from app.models.trimestre import Trimestre
 
 __all__ = [
+    "CatalogoMusica",
     "Ciclo",
     "Evento",
     "Frequencia",
